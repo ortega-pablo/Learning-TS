@@ -1,9 +1,18 @@
 # Learning-TS
 
-### Curso de OpenBootcamp para aprender Typescript.
+## Curso de OpenBootcamp para aprender Typescript.
 
-En este readme voy a ir declarando el proceso de aprendizaje desarrollado mediante el curso de Open Bootcamp
+En este readme voy a ir declarando el proceso de aprendizaje desarrollado mediante el curso de Open Bootcamp sumado a la documentación y curso de Microsoft Learn.
 
+### ¿Qué es Typescript?
+
+Typescript es un lenguaje de código abierto desarrollado por Microsoft. Es un supraconjunto de JavaScript, es decir que nos brinda todas las características conocidas de JavaScript agregando determinadas características que no estaban disponibles.
+
+La principal ventaja de TypeScript es que permite agregar tipos estáticos al código JavaScript.
+
+El tipado estático en tiempo de compilación de TypeScript modela estrechamente el tipado dinámico en tiempo de ejecución de JavaScript. El análisis de tipos de TypeScript se produce completamente en tiempo de compilación y no agrega sobrecarga en tiempo de ejecución al programa.
+
+***
 ## Inicialización del proyecto
 
 En primer lugar creamos la carpeta donde estará alojado todo el proyecto, en este caso Learning-TS.
@@ -39,7 +48,7 @@ npx tsc --init --rootDir src --outDir build --esModuleInterop --resolveJsonModul
 - tsc --init: tsc typescript compiler. Será el encargado de transpilar todos nuestros archivos de TS a JS. El comando --init generará el archivo de configuración tsconfig.json y los comandos siguientes generarán configuraciones dentro de este archivo.
 - --rootDir src: indica la carperta donde se encuentran los archivos ts que se tienen que transpilar.
 - --outDir build: indica la carpeta donde se almacenarán los archivos js ya transpilados.
-- --esModuleInterop: nos permite definir si vamos a tener múltiples versiones de EcmaScript dentro de nuestro proyecto y proveerá la posibilidad de que estas versiones puedan operar entre sí sin problemas. Por defecto esta opción se activa en true.
+- --esModuleInterop: nos permite definir si vamos a tener múltiples versiones de ECMAScript dentro de nuestro proyecto y proveerá la posibilidad de que estas versiones puedan operar entre sí sin problemas. Por defecto esta opción se activa en true.
 - --resolveJsonModule: habilita la posibilidad de utilizar archifo formato JSON e indica que todas las configuraciónes van a tener este formato que utiliza pares de clave valor.
 - --lib es6: con el comando --lib indicamos qué versiones de Ecma Script vamos a utilizar, en este caso es6.
 - --module commonjs: indica que voy a transpilar mi proyecto a common js para que todos los navegadores puedan leer correctamente el código.
@@ -86,3 +95,162 @@ Para ejecutar cualquiera de estos scripts debemos introducir por consola el coma
 npm run "script que quiero ejecutar"
 ```
 
+***
+
+## Sintaxis, variables y estructuras de control
+
+Ya hemos hecho la inicialización del proyecto junto a su configuración principal. Es hora de empezar a introducirnos en este lenguaje.
+
+Como ya sabemos, TypeScript es un supraconjunto de JavaScript, lo que nos permite utilizar toda la sintaxis de ECMAScript junto a la sintaxis específica de TypeScript.
+
+### Declaración de variables
+
+Tal como ya utilizamos en typescript, las variables se pueden declarar con las parlabras reservadas **var, let y const**. Pero typescript fomenta utilizar las palabras reservadas **let y const** ya que **var** declara una variable de ámbito global y **let y const** se utilizan para declarar variables con ámbito de nivel de bloque, lo cual evita que se declare la misma variable varias veces.
+
+Ejemplo de declaración de variables:
+
+```typescript
+var variable1 = "Variable1"
+let variable2 = "Variable2"
+const variable3 = "Variable3"
+```
+
+### Tipado de variables
+
+El tipo de una variable se puede expresar mediante una anotación explícita o implícita (inferencia).
+
+El tipado explícito no es obligatorio, pero sí recomendad. Para declararlo, se utiliza la sintaxis *nombreVariable: tipo*. Por ejemplo, podemos declarar una variable llamada miNumero de tipo number de la siguiente manera:
+
+```typescript
+let miNumero: number = 12 
+```
+Por otro lado, si no colocamos el tipo, typescript intentará inferirlo mediante el valor que le demos a nuestra variable. Por ejemplo:
+
+```typescript
+let nombre = "Pablo"
+```
+En este caso typescrip inferirá que hemos declarado una variable llamada nombre de tipo string con el valor "Pablo". Para relacionar, esta misma variable declarada con el tipo de forma explícita quedaría de la siguiente manera:
+
+```typescript
+let nombre: string = "Pablo"
+```
+En la siguiente tabla podemos observar los diferentes tipos de datos que nos permite utilizar TypeScript, y luego desarrollaremos un poquito sobre cada uno:
+
+- Tipo any
+    - Tipos primitivos
+        - Tipo booleano
+        - Tipo número
+        - Tipo cadena
+        - Tipo enumeración
+        - Tipo void
+    - Tipos de objeto
+        - clase
+        - Interfaz
+        - Matriz
+        - Literales
+    - Tipos parámetro
+
+**Tipo any:** Todos los tipos de TypeScript son subtipos de un único tipo any. Éste es un tipo que puede representar cualquier valor de JavaScript sin restricciónes.
+
+***Tipos primitivos:*** son los tipos *booblean, number, string, void, null y undefined*, junto con enumeración definida por el usuario o tipos *enum*. Forman los principales bloques de compilación para tipos más complejos.
+
+El tipo *void* existe únicamente para indicar la ausencia de un valor, como en una funbción sin ningún valor devuelto. Los tipos *null* y *undefined* son subtipos de todos los demás tipos. No se puede hacer referencia explícita a ellos, sólo se puede hacer referencia a los valores de ellos mediante los literales *null* y *undefined*.
+
+***Tipos de objeto y parámetros de tipo:*** Los tipos de objeto son todos los tipos de clase, de interfaz, de matriz y literales, todo lo que no sea un tipo primitivo.
+
+Los tipos de clase e interfaz se introducen mediante declaraciónes de clase e interfaz, y se hace referencia a ellos con el nombre que se les ha asignado en sus declaraciónes. Los tipos clase e interfaz pueden ser tipos genéricos que tienen uno o más parámetros de tipo. Haremos un desarrollo más profundo de todos estos tipos a continuación.
+
+### Tipos primitivos en typescript
+
+
+
+#### Tipo booleano
+
+Es el tipo de dato más básico y su valor puede ser *true* o *false*
+
+```typescript
+let flag: boolean   //tipo boolean explícito
+let yes = true      //tipo boolean inferido
+let no = false      //tipo boolean inferido
+```
+
+#### Tipos numéricos
+
+En TypeScript todos los valore numéricos son de tipo flotante (*float*) o BigInteger (*bigint*).
+
+>Además de los literales hexadecimales y decimales, Typescript también admite los literales binarios y octales introducidos en ECMAScript 2015
+
+```typescript
+let x: number               //tipo number explícito
+let y = 10                  //tipo number inferido
+let z: number = 123.456     //tipo number explícito
+let big: bigint = 100n      //tipo BigInteger explícito
+```
+
+#### Tipo cadena
+
+Utilizan la palabra calve *string*, y representan secuencias de caracteres almacenados como unidades de código Unicode UTF-16.
+
+Se pueden utilizar comillas dobles (") o comillas simples (') al igual que en JavaScript.
+
+```typescript
+let s: string       //tipo string explícito
+let empty = ""      //tipo string inferido
+let abc = 'abc'     //tipo string inferido
+```
+
+Al igual que en JavaScript podemos utilizar los template strings, que permiten abarcar varias líneas y contener expresiónes insertadas. Por ejemplo: 
+
+```typescript
+let firsName: string = "Pablo"                      //tipo string explícito
+let template: string = `Mi nombre es ${firstName}.
+    Soy nuevo utilizando TypeScript`                //tipo string explícito como template
+```
+
+#### Tipo enumeración
+
+La palabra clave reservada para este tipo es *enum*.
+
+Ofrece una manera sencilla para trabajar con conjuntos de constantes relacionadas.
+
+Permiten especificar una lista de opciones disponibles. Son muy útiles cuando se tiene un conjunto de valores que puede tomar un tipo de variables determinado. 
+
+Podemos explicarlo de una manera más entendible usando un ejemplo:
+
+Supongamos que tenemos un tipo de dato enumeración llamado *Estados*, y que dentro de sí lista los elementos *Completo, Incompleto y Pendiente* de la siguente manera: 
+
+```typescript
+enum Estados {
+    "Completo",
+    "Incompleto",
+    "Pendiente"
+}
+```
+La enumeración es un tipo de dato que almacena pares de clave valor, sindo las claves las que nosotros declaramos en el ejemplo anterior. Por defecto el valor es numérico y en orden ascendente empezando desde 0, es decir, si vemos nuestro ejemplo la clave "Completo" va a tener un valor 0, "incompleto un valor 1 y "Pendiente" un valor 2.
+
+La enumeración nos permite inicializar la secuencia de valores desde cualquier número. Por ejemplo:
+
+```typescript
+enum Estados {
+    "Completo" = 5,
+    "Incompleto",
+    "Pendiente"
+}
+```
+En este caso las claves "Completo", "Incompleto" y "Pendiente", van a tener valores 5, 6 y 7 respectivamente.
+
+De la misma manera podemos asignarle valores que ya no sigan una secuencia de la siguiente manera:
+
+```typescript
+enum Estados {
+    "Completo" = "C",
+    "Incompleto" = "I",
+    "Pendiente" = "P"
+}
+```
+Este tipo de estructuras nos sirve por ejemplo para declarar el estado de una tarea. Por ejemplo si declaramos:
+
+```typescript
+let estadoTarea: Estados = Estados.Completo
+```
+Hemos declarado una variable estado Tarea, de tipo Estados, y cuyo valor (según el último ejemplo) será "C".
