@@ -23,7 +23,7 @@ Dentro del fichero raíz del proyecto, vamos a inicializar un proyecto de node m
 npm init
 ```
 
-y realizamos las configuraciónes de nuestra preferencia para el proyecto (nombre, versión, descripción, etc).
+y realizamos las configuraciones de nuestra preferencia para el proyecto (nombre, versión, descripción, etc).
 
 Una vez inicializado nuestro proyecto npm, podemos proceder a instalar las dependencias necesaria para trabajar sobre el mismo. Esto lo hacemos desde la consola mediante el comando:
 
@@ -31,12 +31,12 @@ Una vez inicializado nuestro proyecto npm, podemos proceder a instalar las depen
 npm i --save-dev @types/node nodemon ts-node typescript rimraf
 ```
 
-- --save-dev: Declaramos que las dependencias a instalar son dependecias de desarrollo.
+- --save-dev: Declaramos que las dependencias a instalar son dependencias de desarrollo.
 - @types/node: Node trabaja sobre librerías de Javascript, por este motivo necesitamos @types/node para poder trabajar en proyectos typescript.
 - nodemon: Utilizado para que cuando se haga un cambio, el proyecto se refresque automáticamente.
 - ts-node: es una versión del run-time de node que nos permite ejecutar archivos de typescript.
 - typescript: instalamos typescript en el proyecto.
-- rimraf: permite generar aplicaciónes más potentes o más empaquetadas. Realiza un proceso similar a lo que hace webpack. Lo utilizamos para generar la build final del proyecto.
+- rimraf: permite generar aplicaciones más potentes o más empaquetadas. Realiza un proceso similar a lo que hace webpack. Lo utilizamos para generar la build final del proyecto.
 
 Es hora de inicializar typescript junto a su configuración. Para ello o hacemos mediante la consola con el siguiente comando:
 
@@ -46,16 +46,16 @@ npx tsc --init --rootDir src --outDir build --esModuleInterop --resolveJsonModul
 
 - npx: npx nos permite utilizar una librería sin necesidad de instalarla en nuestro proyecto.
 - tsc --init: tsc typescript compiler. Será el encargado de transpilar todos nuestros archivos de TS a JS. El comando --init generará el archivo de configuración tsconfig.json y los comandos siguientes generarán configuraciones dentro de este archivo.
-- --rootDir src: indica la carperta donde se encuentran los archivos ts que se tienen que transpilar.
+- --rootDir src: indica la carpeta donde se encuentran los archivos ts que se tienen que transpilar.
 - --outDir build: indica la carpeta donde se almacenarán los archivos js ya transpilados.
 - --esModuleInterop: nos permite definir si vamos a tener múltiples versiones de ECMAScript dentro de nuestro proyecto y proveerá la posibilidad de que estas versiones puedan operar entre sí sin problemas. Por defecto esta opción se activa en true.
-- --resolveJsonModule: habilita la posibilidad de utilizar archifo formato JSON e indica que todas las configuraciónes van a tener este formato que utiliza pares de clave valor.
-- --lib es6: con el comando --lib indicamos qué versiones de Ecma Script vamos a utilizar, en este caso es6.
+- --resolveJsonModule: habilita la posibilidad de utilizar archivos formato JSON e indica que todas las configuraciones van a tener este formato que utiliza pares de clave valor.
+- --lib es6: con el comando --lib indicamos qué versiones de ECMAScript vamos a utilizar, en este caso es6.
 - --module commonjs: indica que voy a transpilar mi proyecto a common js para que todos los navegadores puedan leer correctamente el código.
 - --allowjs true: permite que conviva ts con js dentro del mismo proyecto.
 - --noImplicitAny true: restringe la posibilidad de aplicar el tipo de dato any de forma implícita.
 
-Teniendo hecha la inicialización del proyecto y de las configuraciónes typescript, podemos empezar a adornar el proyecto con algunos scripts para un acceso mas fluído a determinadas funciónes.
+Teniendo hecha la inicialización del proyecto y de las configuraciónes typescript, podemos empezar a adornar el proyecto con algunos scripts para un acceso mas fluido a determinadas funciones.
 
 Primero que nada debemos crear en la raíz del proyecto un archivo llamado nodemon.json, donde se escribirán las configuraciónes para indicarle nodemon cómo debe comportarse en este proyecto, de la siguiente manera:
 
@@ -67,9 +67,9 @@ Primero que nada debemos crear en la raíz del proyecto un archivo llamado nodem
   "exec": "ts-node ./src/index.ts"
 }
 ```
-- watch: indica qué quiero que nodemosn esté escuchando.
-- ext: especificamos el tipo de extensiónes que se van a escuchar o ejecutar.
-- ignore: indica los archivos o carpetas que nodemosn debe ignorar cuando sena modificados.
+- watch: indica qué quiero que nodemon esté escuchando.
+- ext: especificamos el tipo de extensiones que se van a escuchar o ejecutar.
+- ignore: indica los archivos o carpetas que nodemon debe ignorar cuando sena modificados.
 - exec: indicamos el comando que nodemon debe ejecutar.
 
 Una vez hecha esta configuración podemos generar los scripts necesarios en el archivo package.json como vemos a continuación:
@@ -85,7 +85,7 @@ Una vez hecha esta configuración podemos generar los scripts necesarios en el a
 ```
 - test: test por el momento no tiene ninguna configuración, (se le dará más adelante).
 - start: va a indicarle a nodemon que se debe iniciar.
-- transpilation: realizará la transpilación de todos los archivos typescript a archivos javascript mediante la configuracion indicada anteriormente.
+- transpilation: realizará la transpilación de todos los archivos typescript a archivos javascript mediante la configuración indicada anteriormente.
 - build:prod: genera una versión de nuestro proyecto lista para producción y luego la transpila.
 - start:prod: ejecuta la aplicación habiendo realizado el build para producción.
 
@@ -105,7 +105,7 @@ Como ya sabemos, TypeScript es un supraconjunto de JavaScript, lo que nos permit
 
 ### Declaración de variables
 
-Tal como ya utilizamos en typescript, las variables se pueden declarar con las parlabras reservadas **var, let y const**. Pero typescript fomenta utilizar las palabras reservadas **let y const** ya que **var** declara una variable de ámbito global y **let y const** se utilizan para declarar variables con ámbito de nivel de bloque, lo cual evita que se declare la misma variable varias veces.
+Tal como ya utilizamos en typescript, las variables se pueden declarar con las palabras reservadas **var, let y const**. Pero typescript fomenta utilizar las palabras reservadas **let y const** ya que **var** declara una variable de ámbito global y **let y const** se utilizan para declarar variables con ámbito de nivel de bloque, lo cual evita que se declare la misma variable varias veces.
 
 Ejemplo de declaración de variables:
 
@@ -129,7 +129,7 @@ Por otro lado, si no colocamos el tipo, typescript intentará inferirlo mediante
 ```typescript
 let nombre = "Pablo"
 ```
-En este caso typescrip inferirá que hemos declarado una variable llamada nombre de tipo string con el valor "Pablo". Para relacionar, esta misma variable declarada con el tipo de forma explícita quedaría de la siguiente manera:
+En este caso Typescript inferirá que hemos declarado una variable llamada nombre de tipo string con el valor "Pablo". Para relacionar, esta misma variable declarada con el tipo de forma explícita quedaría de la siguiente manera:
 
 ```typescript
 let nombre: string = "Pablo"
@@ -150,15 +150,15 @@ En la siguiente tabla podemos observar los diferentes tipos de datos que nos per
         - Literales
     - Tipos parámetro
 
-**Tipo any:** Todos los tipos de TypeScript son subtipos de un único tipo any. Éste es un tipo que puede representar cualquier valor de JavaScript sin restricciónes.
+**Tipo any:** Todos los tipos de TypeScript son subtipos de un único tipo any. Éste es un tipo que puede representar cualquier valor de JavaScript sin restricciones.
 
-***Tipos primitivos:*** son los tipos *booblean, number, string, void, null y undefined*, junto con enumeración definida por el usuario o tipos *enum*. Forman los principales bloques de compilación para tipos más complejos.
+***Tipos primitivos:*** son los tipos *boolean, number, string, void, null y undefined*, junto con enumeración definida por el usuario o tipos *enum*. Forman los principales bloques de compilación para tipos más complejos.
 
-El tipo *void* existe únicamente para indicar la ausencia de un valor, como en una funbción sin ningún valor devuelto. Los tipos *null* y *undefined* son subtipos de todos los demás tipos. No se puede hacer referencia explícita a ellos, sólo se puede hacer referencia a los valores de ellos mediante los literales *null* y *undefined*.
+El tipo *void* existe únicamente para indicar la ausencia de un valor, como en una función sin ningún valor devuelto. Los tipos *null* y *undefined* son subtipos de todos los demás tipos. No se puede hacer referencia explícita a ellos, sólo se puede hacer referencia a los valores de ellos mediante los literales *null* y *undefined*.
 
 ***Tipos de objeto y parámetros de tipo:*** Los tipos de objeto son todos los tipos de clase, de interfaz, de matriz y literales, todo lo que no sea un tipo primitivo.
 
-Los tipos de clase e interfaz se introducen mediante declaraciónes de clase e interfaz, y se hace referencia a ellos con el nombre que se les ha asignado en sus declaraciónes. Los tipos clase e interfaz pueden ser tipos genéricos que tienen uno o más parámetros de tipo. Haremos un desarrollo más profundo de todos estos tipos a continuación.
+Los tipos de clase e interfaz se introducen mediante declaraciones de clase e interfaz, y se hace referencia a ellos con el nombre que se les ha asignado en sus declaraciones. Los tipos clase e interfaz pueden ser tipos genéricos que tienen uno o más parámetros de tipo. Haremos un desarrollo más profundo de todos estos tipos a continuación.
 
 ### Tipos primitivos en typescript
 
@@ -199,7 +199,7 @@ let empty = ""      //tipo string inferido
 let abc = 'abc'     //tipo string inferido
 ```
 
-Al igual que en JavaScript podemos utilizar los template strings, que permiten abarcar varias líneas y contener expresiónes insertadas. Por ejemplo: 
+Al igual que en JavaScript podemos utilizar los template strings, que permiten abarcar varias líneas y contener expresiones insertadas. Por ejemplo: 
 
 ```typescript
 let firsName: string = "Pablo"                      //tipo string explícito
@@ -217,7 +217,7 @@ Permiten especificar una lista de opciones disponibles. Son muy útiles cuando s
 
 Podemos explicarlo de una manera más entendible usando un ejemplo:
 
-Supongamos que tenemos un tipo de dato enumeración llamado *Estados*, y que dentro de sí lista los elementos *Completo, Incompleto y Pendiente* de la siguente manera: 
+Supongamos que tenemos un tipo de dato enumeración llamado *Estados*, y que dentro de sí lista los elementos *Completo, Incompleto y Pendiente* de la siguiente manera: 
 
 ```typescript
 enum Estados {
@@ -226,7 +226,7 @@ enum Estados {
     "Pendiente"
 }
 ```
-La enumeración es un tipo de dato que almacena pares de clave valor, sindo las claves las que nosotros declaramos en el ejemplo anterior. Por defecto el valor es numérico y en orden ascendente empezando desde 0, es decir, si vemos nuestro ejemplo la clave "Completo" va a tener un valor 0, "incompleto un valor 1 y "Pendiente" un valor 2.
+La enumeración es un tipo de dato que almacena pares de clave valor, siendo las claves las que nosotros declaramos en el ejemplo anterior. Por defecto el valor es numérico y en orden ascendente empezando desde 0, es decir, si vemos nuestro ejemplo la clave "Completo" va a tener un valor 0, "incompleto un valor 1 y "Pendiente" un valor 2.
 
 La enumeración nos permite inicializar la secuencia de valores desde cualquier número. Por ejemplo:
 
