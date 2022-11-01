@@ -248,9 +248,43 @@ enum Estados {
     "Pendiente" = "P"
 }
 ```
-Este tipo de estructuras nos sirve por ejemplo para declarar el estado de una tarea. Por ejemplo si declaramos:
+Este tipo de estructuras nos sirve por ejemplo para declarar el estado de una tarea. Veamos, si declaramos:
 
 ```typescript
 let estadoTarea: Estados = Estados.Completo
 ```
 Hemos declarado una variable estado Tarea, de tipo Estados, y cuyo valor (según el último ejemplo) será "C".
+
+#### Interfaces
+
+En palabras simples, las interfaces definen la estructura del objeto, es decir, define cómo debería verse. En typescript, una interfaz solo contiene la definición de métodos y propiedades, no su implementación. Es la funcionalidad de la clase que realiza la conexión entre la interface proporcionando la conexión con todos los parámetros de la interfaz.
+
+Para crear una interfaz, debemos utilizar la palabra reservada *interface*, la cual debe ser seguida del nombre de la interfaz, luego entre llaves se debe declarar un conjunto de elementos clave valor donde se declaran las propiedades y tipos de la misma de la siguiente manera:
+
+```typescript
+interface Tarea {
+    nombre: string,
+    estado: Estados,
+    urgencia: number
+}
+```
+
+El tipo Estados utilizado corresponde a la enumeración declarada en el ejemplo anterior.
+
+Las interfaces nos permiten declarar variables con su estructura teniendo ya definido el tipo de sus elementos, por ejemplo, podemos declarar la variable tarea1 de la siguiente manera:
+
+```typescript
+let tarea1: Tarea {
+    nombre: "Tarea 1",
+    estado: Estados.pendiente,
+    urgencia: 10
+}
+```
+
+A su vez, las interfaces nos permiten crear tipos personalizados. Para ello utilizamos la palabra reservada *type* como mostramos en el siguiente ejemplo:
+
+```typescript
+type Producto {
+    precio: number,
+    nombre: string
+}
