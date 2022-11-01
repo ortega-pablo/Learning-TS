@@ -105,7 +105,7 @@ Como ya sabemos, TypeScript es un supraconjunto de JavaScript, lo que nos permit
 
 ### Declaración de variables
 
-Tal como ya utilizamos en typescript, las variables se pueden declarar con las palabras reservadas **var, let y const**. Pero typescript fomenta utilizar las palabras reservadas **let y const** ya que **var** declara una variable de ámbito global y **let y const** se utilizan para declarar variables con ámbito de nivel de bloque, lo cual evita que se declare la misma variable varias veces.
+Tal como ya utilizamos en JavaScript, las variables se pueden declarar con las palabras reservadas **var, let y const**. Pero typescript fomenta utilizar las palabras reservadas **let y const** ya que **var** declara una variable de ámbito global y **let y const** se utilizan para declarar variables con ámbito de nivel de bloque, lo cual evita que se declare la misma variable varias veces.
 
 Ejemplo de declaración de variables:
 
@@ -254,6 +254,96 @@ Este tipo de estructuras nos sirve por ejemplo para declarar el estado de una ta
 let estadoTarea: Estados = Estados.Completo
 ```
 Hemos declarado una variable estado Tarea, de tipo Estados, y cuyo valor (según el último ejemplo) será "C".
+
+### Tipos any y unknown
+
+En determinadas ocasiones debemos trabajar con valores que son desconocidos al momento de desarrollar el código. En estos casos posemos utilizar los tipos *any* y *unknown*, así como también podemos utilizar la aserción de tipos y las restricciones de tipo para poder controlar el tipado de los elementos.
+
+#### Tipo any
+
+*any* es un tipo que puede representar cualquier valor de JavaScript sin ninguna restricción. Esto puede ser de mucha utilidad para algunos casos, por ejemplo, cuando se espera un valor de una biblioteca de terceros o entradas de usuario en las que el valor es dinámico, ya que el tipo any permitirá volver a asignar distintos tipos de valores.
+
+Como podemos ver en este ejemplo, podemos declarar una variable de tipo any y luego asignarle diferentes tipos de valores:
+
+```typescript
+let variable: any = 10
+variable = "Mateo"
+variable = true
+```
+El uso de tipo any permite llamar a diferentes métodos, elementos, propiedades, etc. Por ejemplo:
+
+- Permite llamar una propiedad que no exista para el tipo.
+- Permite llamar a la variable como si fuese una función.
+- Permite llamar métodos que solo se aplican a un tipo String.
+
+Este tipo de permisión sin restricciones hacen que el tipo any a veces sea muy complicado de manejar ya que muchas acciones sobre este tipo **no** generarán problemas en tiempo de compilación pero puede que si lo hagan en tiempo de ejecución.
+
+Por este motivo debemos evitar utilizar el tipo *any* siempre que sea posible.
+
+#### Tipo unknown
+
+Aunque es flexible, el tipo *any* puede producir errores inesperados. Para solucionar esto, TypeScript introdujo el tipo *unknown*.
+
+El tipo *unknown* también puede recibir cualquier tipo de valor, sin embargo, no se puede acceder a las propiedades de un tipo *unknown*, tampoco se puede llamar ni construir.
+
+> La diferencia principal entre los tipos *any* y *unknown* es que no se puede interactuar con una variable de tipo *unknown*; si lo hacemos, se generará un error de compilación. *any* omite las comprobaciones en tiempo de compilación y el elemento se evalúa en tiempo de ejecución. Si el método o propiedad que queremos llamar de un elemento de tipo *any* existe, el código se comportará según lo esperado.
+
+### Aserción de tipos
+
+Una aserción de tipos permite tratar una variable como un tipo de datos diferente. Indica a TypeScript que se ha realizado cualquier comprobación necesaria antes de llamar a la instrucción. Es como decirle al compilador "Estoy seguro de lo que hago".
+
+Una aserción de tipos es como una conversión de tipos en otros lenguajes, pero no realiza ninguna comprobación especial reestructuración de los datos. La utiliza sólo el compilador, por lo que no tiene ningún efecto en tiempo de ejecución
+
+Las aserciones de tipos se pueden definir de dos formas. Como lo hacemos en el siguiente ejemplo sobre la variable llamada variable1:
+
+```typescript
+(variable1 as string).toUpperCase() //sintaxis de as
+(<string>variable1).toUpperCase     // sintaxis de corchetes angulares
+```
+
+> *as* es la sintaxis preferida. La sintaxis de corchetes angulares puede generar conflictos con algunas aplicaciones de TypeScript como JSX.
+
+En el siguiente ejemplo podemos ver las comprobaciones necesarias para poder usar la aserción de tipos sobre la variable variable1 y de esta forma poder utilizar el método toUpperCase:
+
+```typescript
+let variable1: unknown = 10
+
+variable1 = true
+variable1 = "Mateo"
+
+if (typeof variable1 === "string") {
+    console.log((variable1 as string).toUpperCase()) // retornará Mateo
+} else {
+    console.log("Error - Se esperaba un sting")  //retornará un mensaje de error
+}
+```
+
+TypeScript ahora da por supuesto que realizamos la comprobación necesaria. La aserción de tipos indica que se debe tratar al elemento como un string y luego realizar el método toUpperCase.
+
+### Restricción de tipos
+
+En el ejemplo anterior se muestra el uso de typeof en el bloque if para examinar el tipo de una expresión en tiempo de ejecución. A esto de le llama **restricción de tipos**.
+
+Se puede utilizar las siguientes condiciones para descubrir el tipo de una variable:
+
+| Tipo      | Expresión                         |
+|-----------|-----------------------------------|
+| string    | typeof s === "string"             |
+| number    | typeof n === "number"             |
+| boolean   | typeof b === "boolean"            |
+| undefined | typeof undefined === "undefined"  |
+| function  | typeof f === "function"           |
+| array     | Array.isArray(a)                  |
+
+#### Tipos de unión, intersección y literales
+
+Los tipos de unión e intersección permiten controlar situaciones en las que un tipo se compone de dos o más tipos posibles, mientras que los tipos literales permiten restringir los valores asignados a un tipo, a una lista reducida de opciones.
+
+#### Tipos de unión
+
+
+
+
 
 #### Interfaces
 
