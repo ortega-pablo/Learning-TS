@@ -55,9 +55,9 @@ npx tsc --init --rootDir src --outDir build --esModuleInterop --resolveJsonModul
 - --allowjs true: permite que conviva ts con js dentro del mismo proyecto.
 - --noImplicitAny true: restringe la posibilidad de aplicar el tipo de dato any de forma implícita.
 
-Teniendo hecha la inicialización del proyecto y de las configuraciónes typescript, podemos empezar a adornar el proyecto con algunos scripts para un acceso mas fluido a determinadas funciones.
+Teniendo hecha la inicialización del proyecto y de las configuraciones typescript, podemos empezar a adornar el proyecto con algunos scripts para un acceso mas fluido a determinadas funciones.
 
-Primero que nada debemos crear en la raíz del proyecto un archivo llamado nodemon.json, donde se escribirán las configuraciónes para indicarle nodemon cómo debe comportarse en este proyecto, de la siguiente manera:
+Primero que nada debemos crear en la raíz del proyecto un archivo llamado nodemon.json, donde se escribirán las configuraciones para indicarle nodemon cómo debe comportarse en este proyecto, de la siguiente manera:
 
 ```json
 {
@@ -341,11 +341,85 @@ Los tipos de unión e intersección permiten controlar situaciones en las que un
 
 #### Tipos de unión
 
+Un tipo unión describe un valor que puede ser uno de entre varios tipos. Esto puede ser muy util cuando no se tenga controlado un valor, como por ejemplo los valores de una biblioteca o una API.
 
+Los tipos de unión restringen la asignación de los valores a los tipos especificados.
 
+El tipo unión, utiliza la barra vertical para separar cada tipo. En el siguiente ejemplo vemos una variable tipoMultiple que puede valores tanto de tipo number como string, y todas las asignaciones siguientes son correctas:
 
+```typescript
+let tipoMultiple: number | string;
 
-#### Interfaces
+tipoMultiple = 20
+tipoMultiple = "Mateo"
+```
+#### Tipos de intersección
+
+Están estrechamente relacionados con los tipos de unión pero se utilizan de maneras muy diferentes.
+
+Un tipo de intersección combina dos o más tipos para crear uno que tenga todas las propiedades de los tipos existentes. Esto permite agregar tipos existentes de forma conjunta para obtener un tipo único que tenga todas las características que necesita.
+
+El tipo de intersección utiliza un & para separar cada tipo.
+
+Los tipos de intersección se usan con mayor frecuencia en interfaces (tema que veremos más adelante). En el siguiente ejemplo se definen dos interfaces (Empleado y Gerente), y luego se crea un tipo de intersección llamado gerenteEmpleado que combina las propiedades de ambas interfaces:
+
+```typescript
+interface Empleado {
+    empleadoId: number,
+    edad: number
+}
+
+interface Gerente {
+    planAcciones: boolean
+}
+
+type GerenteEmpleado = Empleado & Gerente
+
+let nuevoGerente: GerenteEmpleado = {
+    empleadoId: 12345,
+    edad: 35,
+    planAcciones: true
+}
+```
+
+#### Tipos literales
+
+Un literal es un subtipo más concreto de un tipo colectivo. Esto significa que "Hola Mundo" es un elemento *string*, pero un elemento *string* no es "Hola Mundo" dentro del sistema de tipos.
+
+Hay tres conjuntos de tipos literales disponibles en typescript: *string*, *number* y *boolean*.
+
+Los tipos literales se escriben como objetos, matrices, funciones o literales de tipo constructor y se usan para crear tipos a partir de ellos.
+
+En el siguiente ejemplo realizamos una definición de tipo que crea un tipo literal denominado resultadoTest, que puede contener uno de estos tres valores string:
+
+```typescript
+type resultadoTest = "aprobado" | "desaprobado" | "incompleto"
+
+let miResultado: resultadoTest
+
+miResultado = "incompleto"
+miResultado = "aprobado"
+miResultado = "desaprobado"
+```
+### Matrices
+
+Las matrices se pueden escribir de dos maneras. En la primera se utiliza el tipo de los elementos seguidos de corchetes:
+
+```typescript
+let lista: number[] = [1, 2, 3]
+```
+
+En el segundo caso, se usa un tipo *array* genérico con la sintaxis Array<type>:
+
+```typescript
+let lista: Array<number> = [1, 2, 3]
+```
+
+### Tuplas
+
+Tener una matriz de los mismos tipos de valor es útil, pero a veces tiene una matriz que contiene valores de tipos mixtos. Para este propósito, TypeScript proporciona el tipo de tupla. Para declarar una tupla, se usa la sintaxis variableTupla: [type, type, type, ...].
+
+### Interfaces
 
 En palabras simples, las interfaces definen la estructura del objeto, es decir, define cómo debería verse. En typescript, una interfaz solo contiene la definición de métodos y propiedades, no su implementación. Es la funcionalidad de la clase que realiza la conexión entre la interface proporcionando la conexión con todos los parámetros de la interfaz.
 
@@ -378,3 +452,4 @@ type Producto {
     precio: number,
     nombre: string
 }
+```
