@@ -421,7 +421,9 @@ Tener una matriz de los mismos tipos de valor es útil, pero a veces tiene una m
 
 ### Interfaces
 
-En palabras simples, las interfaces definen la estructura del objeto, es decir, define cómo debería verse. En typescript, una interfaz solo contiene la definición de métodos y propiedades, no su implementación. Es la funcionalidad de la clase que realiza la conexión entre la interface proporcionando la conexión con todos los parámetros de la interfaz.
+En TypeScript, las interfaces se utilizan de la misma forma que en la programación orientada a objetos, pero también se pueden utilizar para definir tipos de objetos.
+
+En palabras simples, las interfaces definen la estructura del objeto, es decir, define cómo debería verse. En typescript, una interfaz solo contiene la definición de métodos y propiedades, no su implementación.
 
 Para crear una interfaz, debemos utilizar la palabra reservada *interface*, la cual debe ser seguida del nombre de la interfaz, luego entre llaves se debe declarar un conjunto de elementos clave valor donde se declaran las propiedades y tipos de la misma de la siguiente manera:
 
@@ -433,7 +435,7 @@ interface Tarea {
 }
 ```
 
-El tipo Estados utilizado corresponde a la enumeración declarada en el ejemplo anterior.
+El tipo Estados utilizado corresponde a la enumeración declarada en el ejemplo donde explicamos enumeración.
 
 Las interfaces nos permiten declarar variables con su estructura teniendo ya definido el tipo de sus elementos, por ejemplo, podemos declarar la variable tarea1 de la siguiente manera:
 
@@ -445,11 +447,23 @@ let tarea1: Tarea {
 }
 ```
 
-A su vez, las interfaces nos permiten crear tipos personalizados. Para ello utilizamos la palabra reservada *type* como mostramos en el siguiente ejemplo:
+Podemos detallar algunos de los usos de las interfaces en la siguiente lista: 
+
+- Crear nombres abreviados para tipos de uso frecuente. Esto nos permite utilizar las ventajas de IntelliSense y la comprobación de tipos.
+
+- Controlar la coherencia de un conjunto de objetos porque cada objeto que implementa la interfaz funciona bajo las mismas definiciones de tipo.
+
+- Describir las Api de JavaScript existentes, y aclarar los parámetros de función y los tipos del valor devueltos. Una interfaz puede proporcionar una idea clara de lo que espera de una función y lo que devolverá, sin necesidad de consultar repetidamente la documentación.
+
+Las interfaces se pueden extender unas a otras, lo que permite copiar los elementos de una interfaz en otra. Esto ofrece mayor flexibilidad a la hora de separar las interfaces en componentes reutilizables.
+
+Para extender una interfaz en otra utilizamos la palabra reservada *extends*, por ejemplo, la siguiente interfaz llamada Detalle tiene todas las características de la interfaz Tarea junto a sus nuevas propiedades de detalle y propietario:
 
 ```typescript
-type Producto {
-    precio: number,
-    nombre: string
+interface Detalle extends Tarea {
+    detalle: string,
+    propietario?: string
 }
 ```
+
+El símbolo ? determina que el parámetro es opcional.
